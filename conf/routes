@@ -1,0 +1,48 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index()
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+#plivo sms example
+GET		/sms/receive				controllers.Sms.receive(To, From, Text, MessageUUID, Type)
+GET		/sms/reply					controllers.Sms.reply(To, From, Text, MessageUUID, Type)
+GET		/sms/notification			controllers.Sms.callback()
+
+#### inbound call example
+## play mp3
+GET		/incall/playmp3				controllers.InCall.playMp3()
+POST	/incall/playmp3				controllers.InCall.playMp3()
+
+##speak some text and choose language
+GET		/incall/chooselang			controllers.InCall.chooseLang()
+GET		/incall/chooselang/getdigits	controllers.InCall.chooseLangGetDigits(Digits)
+
+## forward call
+GET		/incall/forward				controllers.InCall.forward()
+
+## record voice mail
+GET		/incall/recvoicemail		controllers.InCall.recVoiceMail()
+GET		/incall/recvoicemail/callback	controllers.InCall.recVoiceMailCallback(RecordUrl, RecordingID)
+GET		/incall/recvoicemail/transcript	controllers.InCall.recVoiceMailTranscript(transcription)
+
+## record call
+GET		/incall/record				controllers.InCall.record()
+GET		/incall/record/callback		controllers.InCall.recordCallback(RecordUrl, RecordingID)
+
+## play dial music
+GET		/incall/playdialmusic		controllers.InCall.playDialMusic()
+
+## give IVR, based on input digits forward to respective number
+GET		/incall/ivrforward			controllers.InCall.ivrForward()
+GET		/incall/ivrforward/getdigits	controllers.InCall.ivrForwardGetDigits(Digits)
+
+## conference bridge
+GET		/incall/confbridge			controllers.InCall.confBridge()
+
+##Incoming caller in a call queue (use conf bridge)
+GET		/incall/inccallqueue		controllers.InCall.incCallQueue()
