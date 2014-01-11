@@ -305,7 +305,7 @@ public class InCall extends Controller {
 			} else if ("2".equals(Digits)) {
 				Number num = new Number("12345678");
 				dial.append(num);
-				plivoXML.append(num);
+				plivoXML.append(dial);
 			} else {
 				Speak s = new Speak(
 						"Invalid digits. Only 1 and 2 are valid digits");
@@ -313,6 +313,7 @@ public class InCall extends Controller {
 			}
 			resp = plivoXML.toXML();
 		} catch (PlivoException pe) {
+			Logger.error("PlivoException :" + pe.getMessage());
 			resp = "<response></response>";
 		}
 		Logger.debug("response = " + resp);
